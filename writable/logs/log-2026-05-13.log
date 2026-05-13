@@ -218,3 +218,91 @@ in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
  8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
  9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
 10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+ERROR - 2026-05-13 08:11:55 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct('/home/aropih/Mp...')
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2026-05-13 08:11:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: CLI, Route: db:seed/MainSeeder]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+ 4 SYSTEMPATH/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+ 5 SYSTEMPATH/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run([...])
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', [...])
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-13 08:15:07 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct('/home/aropih/Mp...')
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2026-05-13 08:15:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: CLI, Route: db:seed/MainSeeder]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+ 4 SYSTEMPATH/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+ 5 SYSTEMPATH/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run([...])
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', [...])
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
