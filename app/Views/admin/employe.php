@@ -182,13 +182,6 @@
 
 </div>
 </section>
-<script>
-function filterUsers(query) {
-    query = query.toLowerCase();
-    document.querySelectorAll('#users-table tr[data-search]').forEach(row => {
-        row.style.display = row.dataset.search.includes(query) ? '' : 'none';
-    });
-}
-</script>
+
 </body>
 </html>
