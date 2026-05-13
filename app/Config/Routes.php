@@ -5,63 +5,57 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
 // ── AUTHENTIFICATION ──────────────────────────────────────────
-$routes->get('/',                'AuthController::index');
-$routes->get('/login',           'AuthController::index');
-$routes->post('/login',          'AuthController::login');
-$routes->get('/logout',          'AuthController::logout');
- 
-// Inscription étape 1
-$routes->get('/register',        'AuthController::register');
-$routes->post('/register/step1', 'AuthController::registerStep1');  // AJAX
-// Inscription étape 2
-$routes->post('/register/step2', 'AuthController::registerStep2');  // AJAX
- 
-// ── FRONT OFFICE (utilisateurs connectés) ────────────────────
-$routes->get('/dashboard',       'DashboardController::index');
- 
-// Moteur de suggestion
-$routes->get('/suggestions',     'SuggestionController::index');
-$routes->post('/suggestions/get','SuggestionController::getSuggestions'); // AJAX
- 
-// Programme : achat + PDF
-$routes->post('/programme/acheter',  'ProgrammeController::acheter');
-$routes->get('/programme/pdf/(:num)','ProgrammeController::exportPdf/$1');
-$routes->get('/mes-programmes',      'ProgrammeController::mesProgrammes');
- 
-// Porte-monnaie
-$routes->get('/portefeuille',        'PortefeuilleController::index');
-$routes->post('/portefeuille/recharger', 'PortefeuilleController::recharger'); // AJAX
-$routes->post('/portefeuille/demander-gold', 'PortefeuilleController::demanderGold'); // AJAX
- 
-// ── BACK OFFICE (admin) ───────────────────────────────────────
-$routes->get('/admin',               'AdminController::index');
-$routes->get('/admin/stats',         'AdminController::stats');
- 
-// CRUD Régimes
-$routes->get('/admin/regimes',           'AdminController::regimes');
-$routes->post('/admin/regimes/store',    'AdminController::storeRegime');
-$routes->post('/admin/regimes/update/(:num)', 'AdminController::updateRegime/$1');
-$routes->post('/admin/regimes/delete/(:num)', 'AdminController::deleteRegime/$1');
- 
-// CRUD Activités
-$routes->get('/admin/activites',             'AdminController::activites');
-$routes->post('/admin/activites/store',      'AdminController::storeActivite');
-$routes->post('/admin/activites/update/(:num)', 'AdminController::updateActivite/$1');
-$routes->post('/admin/activites/delete/(:num)', 'AdminController::deleteActivite/$1');
- 
-// CRUD Aliments
-$routes->get('/admin/aliments',              'AdminController::aliments');
-$routes->post('/admin/aliments/store',       'AdminController::storeAliment');
-$routes->post('/admin/aliments/delete/(:num)','AdminController::deleteAliment/$1');
- 
-// Gestion codes de recharge
-$routes->get('/admin/codes',                 'AdminController::codes');
-$routes->post('/admin/codes/store',          'AdminController::storeCode');
-$routes->post('/admin/codes/valider/(:num)', 'AdminController::validerCode/$1');
-$routes->post('/admin/codes/delete/(:num)',  'AdminController::deleteCode/$1');
- 
-// Gestion utilisateurs
-$routes->get('/admin/users',                 'AdminController::users');
-$routes->post('/admin/users/gold/(:num)',     'AdminController::toggleGold/$1');
-$routes->post('/admin/users/request-gold/(:num)', 'AdminController::requestGold/$1');
+$routes->get('/',               'AuthController::index');
+$routes->get('/login',          'AuthController::index');
+$routes->post('/login',         'AuthController::login');
+$routes->get('/logout',         'AuthController::logout');
+
+
+// ── EMPLOYÉ ───────────────────────────────────────────────────
+$routes->get('/employe/dashboard',       'EmployeController::dashboard');
+
+// Demandes de congé
+$routes->get('/employe/conge',           'EmployeController::index');
+$routes->get('/employe/conge/create',    'EmployeController::create');
+$routes->post('/employe/conge/store',    'EmployeController::store');
+$routes->post('/employe/conge/annuler/(:num)', 'EmployeController::annuler/$1');
+
+// Profil
+$routes->get('/employe/profil',          'EmployeController::profil');
+$routes->post('/employe/profil/update',  'EmployeController::updateProfil');
+
+
+// ── RESPONSABLE RH ────────────────────────────────────────────
+$routes->get('/rh',                      'RhController::index');
+$routes->post('/rh/approuver/(:num)',    'RhController::approuver/$1');
+$routes->post('/rh/refuser/(:num)',      'RhController::refuser/$1');
+$routes->get('/rh/soldes',               'RhController::soldes');
+
+
+// ── ADMIN ─────────────────────────────────────────────────────
+$routes->get('/admin/dashboard',         'AdminController::index');
+
+// CRUD Employés
+$routes->get('/admin/employe',                      'AdminController::employes');
+$routes->post('/admin/employe/store',               'AdminController::storeEmploye');
+$routes->post('/admin/employe/update/(:num)',        'AdminController::updateEmploye/$1');
+$routes->post('/admin/employe/desactiver/(:num)',    'AdminController::desactiverEmploye/$1');
+$routes->post('/admin/employe/solde/(:num)',         'AdminController::ajusterSolde/$1');
+
+// CRUD Départements
+$routes->get('/admin/departement',                  'AdminController::departements');
+$routes->post('/admin/departement/store',           'AdminController::storeDepartement');
+$routes->post('/admin/departement/update/(:num)',   'AdminController::updateDepartement/$1');
+$routes->post('/admin/departement/delete/(:num)',   'AdminController::deleteDepartement/$1');
+
+// CRUD Types de congé
+$routes->get('/admin/type-conge',                   'AdminController::typesConge');
+$routes->post('/admin/type-conge/store',            'AdminController::storeTypeConge');
+$routes->post('/admin/type-conge/update/(:num)',    'AdminController::updateTypeConge/$1');
+$routes->post('/admin/type-conge/delete/(:num)',    'AdminController::deleteTypeConge/$1');
+
+// Historique & Stats
+$routes->get('/admin/historique',                   'AdminController::historique');
+$routes->get('/admin/stats',                        'AdminController::stats');
