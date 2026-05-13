@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1778258779;_ci_previous_url|s:46:"http://localhost:8087/index.php/admin/aliments";register_step1|a:4:{s:3:"nom";s:9:"test test";s:5:"email";s:14:"test@gmail.com";s:5:"genre";s:1:"M";s:8:"password";s:8:"test1234";}isLoggedIn|b:1;userId|s:1:"1";userName|s:14:"Administrateur";userEmail|s:15:"admin@regime.mg";userRole|s:5:"admin";isGold|b:1;
