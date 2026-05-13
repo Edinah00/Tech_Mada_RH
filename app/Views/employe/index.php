@@ -23,7 +23,7 @@
       <div class="data-card">
         <div class="data-card-head"><h3>Mes demandes</h3></div>
         <table class="tbl">
-          <thead><tr><th>Type</th><th>Période</th><th>Durée</th><th>Statut</th><th>Commentaire RH</th></tr></thead>
+          <thead><tr><th>Type</th><th>Période</th><th>Durée</th><th>Statut</th><th>Commentaire RH</th><th>Action</th></tr></thead>
           <tbody>
             <?php foreach ($conges as $c): ?>
               <tr>
@@ -46,6 +46,18 @@
                 ?>
                 <td><span class="statut <?= $statusClass ?>"><?= $statusLabel ?></span></td>
                 <td class="td-muted"><?= esc($c['commentaire_rh'] ?? '—') ?></td>
+                <td>
+                  <?php if ($c['statut'] === 'en_attente'): ?>
+                    <form method="POST" action="/employe/conge/annuler/<?= $c['id'] ?>" onsubmit="return confirm('Annuler cette demande ?')" style="display:inline">
+                      <?= csrf_field() ?>
+                      <button type="submit" class="btn-sm btn-cancel">
+                        <i class="bi bi-x-circle"></i> Annuler
+                      </button>
+                    </form>
+                  <?php else: ?>
+                    <span class="td-muted" style="font-size:.75rem">—</span>
+                  <?php endif; ?>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
