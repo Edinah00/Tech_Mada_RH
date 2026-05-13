@@ -306,3 +306,183 @@ in SYSTEMPATH/Database/BaseConnection.php on line 606.
  8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
  9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
 10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-13 09:24:14 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct('/home/aropih/Mp...')
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run(Array)
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2026-05-13 09:24:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: CLI, Route: db:seed/MainSeeder]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/Database.php(74): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/Config.php(111): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\SQLite3\Connection))
+ 4 SYSTEMPATH/Database/Seeder.php(103): CodeIgniter\Database\Config::forge('default')
+ 5 SYSTEMPATH/Commands/Database/Seed.php(71): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\Seed->run([...])
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', [...])
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-05-13 09:25:05 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct('/home/aropih/Mp...')
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/app/Models/EmployeModel.php(19): CodeIgniter\BaseModel->first()
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/app/Controllers/AuthController.php(23): App\Models\EmployeModel->findByEmail('employe@techmad...')
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#11 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#13 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/rewrite.php(44): require_once('/home/edinah/Do...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/app/Models/EmployeModel.php(19): CodeIgniter\BaseModel->first()
+#7 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/app/Controllers/AuthController.php(23): App\Models\EmployeModel->findByEmail('employe@techmad...')
+#8 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(951): App\Controllers\AuthController->login()
+#9 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#10 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 /home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/system/rewrite.php(44): require_once('/home/edinah/Do...')
+#15 {main}
+CRITICAL - 2026-05-13 09:25:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: POST, Route: login]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employes`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH/Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/EmployeModel.php(19): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/AuthController.php(23): App\Models\EmployeModel->findByEmail('employe@techmada.mg')
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\AuthController->login()
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php')
+ERROR - 2026-05-13 09:48:11 --> CHECK constraint failed: statut IN ('en_attente','approuve','refuse','annule')
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(163): SQLite3->exec('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `conges` SET `statut` = :statut:, `traite_par` = :traite_par:, `commentaire_rh` = :commentaire_rh:
+WHERE `conges`.`id` IN :conges.id:', [...], false)
+ 5 SYSTEMPATH/Model.php(406): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH/BaseModel.php(1074): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH/Controllers/RhController.php(129): CodeIgniter\Model->update(3, [...])
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->refuser(3)
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RhController))
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php')
+CRITICAL - 2026-05-13 09:48:11 --> CodeIgniter\Database\Exceptions\DatabaseException: CHECK constraint failed: statut IN ('en_attente','approuve','refuse','annule')
+[Method: POST, Route: rh/refuser/3]
+in SYSTEMPATH/Database/BaseConnection.php on line 865.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `conges` SET `statut` = :statut:, `traite_par` = :traite_par:, `commentaire_rh` = :commentaire_rh:
+WHERE `conges`.`id` IN :conges.id:', [...], false)
+ 2 SYSTEMPATH/Model.php(406): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH/BaseModel.php(1074): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH/Controllers/RhController.php(129): CodeIgniter\Model->update(3, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->refuser(3)
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RhController))
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php')
+CRITICAL - 2026-05-13 09:48:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: CHECK constraint failed: statut IN ('en_attente','approuve','refuse','annule')
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 174.
+ 1 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 2 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `conges` SET `statut` = :statut:, `traite_par` = :traite_par:, `commentaire_rh` = :commentaire_rh:
+WHERE `conges`.`id` IN :conges.id:', [...], false)
+ 4 SYSTEMPATH/Model.php(406): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH/BaseModel.php(1074): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update([...], [...])
+ 7 APPPATH/Controllers/RhController.php(129): CodeIgniter\Model->update(3, [...])
+ 8 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->refuser(3)
+ 9 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RhController))
+10 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH/rewrite.php(44): require_once('/home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php')
+CRITICAL - 2026-05-13 09:48:11 --> [Caused by] Exception: CHECK constraint failed: statut IN ('en_attente','approuve','refuse','annule')
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 163.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(163): SQLite3->exec('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `conges` SET `statut` = \'refusee\', `traite_par` = 2, `commentaire_rh` = \'vous devez travailler\'
+WHERE `conges`.`id` IN (3)')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `conges` SET `statut` = :statut:, `traite_par` = :traite_par:, `commentaire_rh` = :commentaire_rh:
+WHERE `conges`.`id` IN :conges.id:', [...], false)
+ 5 SYSTEMPATH/Model.php(406): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH/BaseModel.php(1074): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH/Model.php(709): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH/Controllers/RhController.php(129): CodeIgniter\Model->update(3, [...])
+ 9 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\RhController->refuser(3)
+10 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RhController))
+11 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH/rewrite.php(44): require_once('/home/edinah/Documents/L2/S4/SI/Tech_Mada_RH/public/index.php')

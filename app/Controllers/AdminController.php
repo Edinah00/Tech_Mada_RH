@@ -97,7 +97,7 @@ class AdminController extends BaseController
             FROM conges c
             JOIN employes e ON e.id = c.employe_id
             JOIN types_conge tc ON tc.id = c.type_conge_id
-            WHERE c.statut = 'approuve'
+              WHERE c.statut = 'approuve'
               AND c.date_debut <= date('now')
               AND c.date_fin   >= date('now')
             ORDER BY c.date_fin ASC

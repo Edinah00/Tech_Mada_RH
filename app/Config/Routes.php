@@ -29,8 +29,10 @@ $routes->post('/employe/profil/update',  'EmployeController::updateProfil');
 
 // ── RESPONSABLE RH ────────────────────────────────────────────
 $routes->get('/rh',                      'RhController::index');
+$routes->get('/rh/historique',           'RhController::index');
 $routes->post('/rh/approuver/(:num)',    'RhController::approuver/$1');
 $routes->post('/rh/refuser/(:num)',      'RhController::refuser/$1');
+$routes->post('/rh/annuler/(:num)',      'RhController::annuler/$1');
 $routes->get('/rh/soldes',               'RhController::soldes');
 
 

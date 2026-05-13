@@ -41,5 +41,26 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
         $this->session = service('session');
+
+        // Compteur global utilisé par la sidebar.
+        // On le recalcule à chaque requête pour éviter un badge figé.
+        if ($this->session->get('isLoggedIn')) {
+            $role = $this->session->get('userRole');
+            $db = \Config\Database::connect();
+            $builder = $db->table('conges');
+
+            if ($role === 'employe') {
+                $pendingCount = $builder
+                    ->where('employe_id', (int) $this->session->get('userId'))
+                    ->where('statut', 'en_attente')
+                    ->countAllResults();
+            } else {
+                $pendingCount = $builder
+                    ->where('statut', 'en_attente')
+                    ->countAllResults();
+            }
+
+            $this->session->set('pendingCount', $pendingCount);
+        }
     }
 }

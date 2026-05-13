@@ -112,13 +112,19 @@ class RhController extends BaseController
     {
         $this->requireRh();
         $congeModel = new CongeModel();
+        $soldeModel = new SoldeModel();
         $conge      = $congeModel->find($id);
 
-        if (!$conge || $conge['statut'] !== 'en_attente') {
+        if (!$conge || !in_array($conge['statut'], ['en_attente', 'approuve'], true)) {
             return redirect()->to('/rh')->with('error', 'Demande introuvable ou déjà traitée.');
         }
 
         $commentaire = $this->request->getPost('commentaire_rh') ?: 'Demande refusée.';
+
+        if ($conge['statut'] === 'approuve') {
+            $annee = (int) date('Y', strtotime($conge['date_debut']));
+            $soldeModel->recréditer($conge['employe_id'], $conge['type_conge_id'], $annee, (int)$conge['nb_jours']);
+        }
 
         $congeModel->update($id, [
             'statut'         => 'refuse',
@@ -128,6 +134,33 @@ class RhController extends BaseController
 
         return redirect()->to('/rh')
             ->with('success', 'Demande refusée.');
+    }
+
+    // ─── ANNULER ─────────────────────────────────────────────
+    public function annuler(int $id)
+    {
+        $this->requireRh();
+        $congeModel = new CongeModel();
+        $soldeModel = new SoldeModel();
+        $conge      = $congeModel->find($id);
+
+        if (!$conge || !in_array($conge['statut'], ['en_attente', 'approuve'], true)) {
+            return redirect()->to('/rh')->with('error', 'Seules les demandes en attente ou approuvées peuvent être annulées.');
+        }
+
+        if ($conge['statut'] === 'approuve') {
+            $annee = (int) date('Y', strtotime($conge['date_debut']));
+            $soldeModel->recréditer($conge['employe_id'], $conge['type_conge_id'], $annee, (int)$conge['nb_jours']);
+        }
+
+        $congeModel->update($id, [
+            'statut'         => 'annule',
+            'traite_par'     => $this->session->get('userId'),
+            'commentaire_rh' => $this->request->getPost('commentaire_rh') ?: 'Demande annulée par RH.',
+        ]);
+
+        return redirect()->to('/rh')
+            ->with('success', 'Demande annulée.');
     }
 
     // ─── SOLDES EMPLOYÉS ─────────────────────────────────────

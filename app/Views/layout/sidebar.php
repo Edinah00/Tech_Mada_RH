@@ -23,14 +23,19 @@ function active_class(string $needle, string $uri): string {
   </div>
 
   <nav class="sidebar-nav">
-    <?php if ($role === 'admin' || $role === 'rh'): ?>
+    <?php if ($role === 'admin'): ?>
       <div class="sidebar-section">Gestion</div>
-      <li><a href="<?= base_url($role === 'admin' ? '/admin/stats' : '/rh') ?>" class="<?= active_class($role === 'admin' ? 'admin/stats' : 'rh', $uri) ?>"><i class="bi bi-speedometer2"></i> <?= $role === 'admin' ? "Vue d'ensemble" : "Demandes à traiter" ?></a></li>
-      <li><a href="<?= base_url($role === 'admin' ? '/admin/historique' : '/rh') ?>" class="<?= trim(active_class('admin/historique', $uri) . ' ' . active_class('rh', $uri)) ?>"><i class="bi bi-inbox"></i> Toutes les demandes <span class="nav-badge alert">4</span></a></li>
+      <li><a href="<?= base_url('/admin/stats') ?>" class="<?= active_class('admin/stats', $uri) ?>"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
+      <li><a href="<?= base_url('/admin/historique') ?>" class="<?= active_class('admin/historique', $uri) ?>"><i class="bi bi-inbox"></i> Toutes les demandes <span class="nav-badge alert">4</span></a></li>
       <li><a href="<?= base_url('/admin/employe') ?>" class="<?= active_class('admin/employe', $uri) ?>"><i class="bi bi-people"></i> Employés</a></li>
       <li><a href="<?= base_url('/admin/departement') ?>" class="<?= active_class('admin/departement', $uri) ?>"><i class="bi bi-building"></i> Départements</a></li>
       <li><a href="<?= base_url('/admin/type-conge') ?>" class="<?= active_class('admin/type-conge', $uri) ?>"><i class="bi bi-tags"></i> Types de congé</a></li>
-      <li><a href="<?= base_url('/rh/soldes') ?>" class="<?= active_class('rh/soldes', $uri) ?>"><i class="bi bi-sliders"></i> Soldes annuels</a></li>
+      <li><a href="<?= base_url('/admin/historique') ?>" class="<?= active_class('admin/historique', $uri) ?>"><i class="bi bi-clipboard-data"></i> Historique RH</a></li>
+    <?php elseif ($role === 'rh'): ?>
+      <div class="sidebar-section">Responsable RH</div>
+      <li><a href="<?= base_url('/rh') ?>" class="<?= active_class('/rh', $uri) ?>"><i class="bi bi-speedometer2"></i> Demandes à traiter</a></li>
+      <li><a href="<?= base_url('/rh/soldes') ?>" class="<?= active_class('rh/soldes', $uri) ?>"><i class="bi bi-people"></i> Soldes employés</a></li>
+      <li><a href="<?= base_url('/rh/historique') ?>" class="<?= active_class('rh/historique', $uri) ?>"><i class="bi bi-inbox"></i> Historique</a></li>
     <?php else: ?>
       <div class="sidebar-section">Menu</div>
       <li><a href="<?= base_url('/employe/dashboard') ?>" class="<?= active_class('employe/dashboard', $uri) ?>"><i class="bi bi-grid-1x2"></i> Tableau de bord</a></li>
