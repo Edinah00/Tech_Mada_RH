@@ -2,58 +2,61 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-use App\Models\UserDetailModel;
+use App\Models\EmployeModel;
 
-/**
- * Gère l'authentification et l'inscription en 2 étapes.
- */
 class AuthController extends BaseController
 {
     public function index()
     {
-        // Redirige si déjà connecté
         if ($this->session->get('isLoggedIn')) {
-            return redirect()->to('/dashboard');
+            return $this->redirectByRole();
         }
-        return view('auth/login', ['title' => 'Connexion']);
+        return view('auth/login', ['title' => 'Connexion — TechMada RH']);
     }
 
-    /**
-     * Traite la connexion (POST /login).
-     */
     public function login()
     {
         $email    = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $userModel = new UserModel();
-        $user      = $userModel->findByEmail($email);
+        $model = new EmployeModel();
+        $user  = $model->findByEmail($email);
 
         if (!$user || !password_verify($password, $user['password'])) {
-            return redirect()->back()->with('error', 'Email ou mot de passe incorrect.');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Email ou mot de passe incorrect.');
+        }
+
+        if (!$user['actif']) {
+            return redirect()->back()
+                ->with('error', 'Votre compte a été désactivé. Contactez l\'administrateur.');
         }
 
         $this->session->set([
-            'isLoggedIn' => true,
-            'userId'     => $user['id'],
-            'userName'   => $user['nom'],
-            'userEmail'  => $user['email'],
-            'userRole'   => $user['role'],
-            'isGold'     => (bool)$user['is_gold'],
+            'isLoggedIn'    => true,
+            'userId'        => $user['id'],
+            'userName'      => trim($user['prenom'] . ' ' . $user['nom']),
+            'userEmail'     => $user['email'],
+            'userRole'      => $user['role'],
+            'departementId' => $user['departement_id'],
         ]);
 
-        return redirect()->to($user['role'] === 'admin' ? '/admin' : '/dashboard');
+        return $this->redirectByRole();
     }
 
-   
-
-    /**
-     * Déconnexion.
-     */
     public function logout()
     {
         $this->session->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/login')->with('success', 'Déconnexion réussie.');
+    }
+
+    private function redirectByRole()
+    {
+        return match ($this->session->get('userRole')) {
+            'admin' => redirect()->to('/admin/dashboard'),
+            'rh'    => redirect()->to('/rh'),
+            default => redirect()->to('/employe/dashboard'),
+        };
     }
 }
