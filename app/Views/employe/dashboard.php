@@ -21,11 +21,12 @@
       </div>
     </div>
     <div class="content">
+      <?= view('layout/flash') ?>
       <div class="metrics">
         <div class="metric"><div class="metric-top"><div class="metric-icon mi-amber"><i class="bi bi-hourglass-split"></i></div></div><div class="metric-val"><?= (int)$stats['en_attente'] ?></div><div class="metric-label">En attente</div></div>
-        <div class="metric"><div class="metric-top"><div class="metric-icon mi-green"><i class="bi bi-check-circle"></i></div></div><div class="metric-val"><?= (int)$stats['approuvee'] ?></div><div class="metric-label">Approuvées</div></div>
+        <div class="metric"><div class="metric-top"><div class="metric-icon mi-green"><i class="bi bi-check-circle"></i></div></div><div class="metric-val"><?= (int)$stats['approuve'] ?></div><div class="metric-label">Approuvées</div></div>
         <div class="metric"><div class="metric-top"><div class="metric-icon mi-forest"><i class="bi bi-calendar-check"></i></div></div><div class="metric-val"><?= (int)$joursRestants ?></div><div class="metric-label">Jours restants</div></div>
-        <div class="metric"><div class="metric-top"><div class="metric-icon mi-red"><i class="bi bi-x-circle"></i></div></div><div class="metric-val"><?= (int)$stats['refusee'] ?></div><div class="metric-label">Refusées</div></div>
+        <div class="metric"><div class="metric-top"><div class="metric-icon mi-red"><i class="bi bi-x-circle"></i></div></div><div class="metric-val"><?= (int)$stats['refuse'] ?></div><div class="metric-label">Refusées</div></div>
       </div>
       <div class="data-card">
         <div class="data-card-head"><h3>Mes soldes de congés</h3></div>
@@ -53,7 +54,21 @@
                 <td><span class="type-badge"><?= esc($c['type_libelle']) ?></span></td>
                 <td class="td-muted"><?= date('d/m/Y', strtotime($c['date_debut'])) ?> - <?= date('d/m/Y', strtotime($c['date_fin'])) ?></td>
                 <td class="td-mono"><?= (int)$c['nb_jours'] ?> j</td>
-                <td><span class="statut <?= $c['statut'] === 'en_attente' ? 's-attente' : ($c['statut'] === 'approuvee' ? 's-approuvee' : 's-refusee') ?>"><?= esc($c['statut']) ?></span></td>
+                <?php
+                  $statusClass = match ($c['statut']) {
+                    'en_attente' => 's-attente',
+                    'approuve'   => 's-approuvee',
+                    'refuse'     => 's-refusee',
+                    default      => 's-annulee',
+                  };
+                  $statusLabel = match ($c['statut']) {
+                    'en_attente' => 'en attente',
+                    'approuve'   => 'approuvée',
+                    'refuse'     => 'refusée',
+                    default      => 'annulée',
+                  };
+                ?>
+                <td><span class="statut <?= $statusClass ?>"><?= $statusLabel ?></span></td>
               </tr>
             <?php endforeach; ?>
           </tbody>

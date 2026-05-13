@@ -24,12 +24,7 @@
     </div>
 
     <div class="content">
-      <?php if (session()->getFlashdata('success')): ?>
-        <div class="flash flash-success"><i class="bi bi-check-circle-fill"></i> <?= esc(session()->getFlashdata('success')) ?></div>
-      <?php endif; ?>
-      <?php if (session()->getFlashdata('error')): ?>
-        <div class="flash flash-error"><i class="bi bi-exclamation-circle-fill"></i> <?= esc(session()->getFlashdata('error')) ?></div>
-      <?php endif; ?>
+      <?= view('layout/flash') ?>
 
       <div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start">
         <div class="form-section" style="margin:0">
@@ -39,11 +34,11 @@
             <div class="form-grid-2" style="margin-bottom:1rem">
               <div class="f-group">
                 <label class="f-label">Prénom</label>
-                <input type="text" name="prenom" class="f-input" value="<?= esc($emp['prenom'] ?? '') ?>" required/>
+                <input type="text" name="prenom" class="f-input" value="<?= esc(old('prenom', $emp['prenom'] ?? '')) ?>" required/>
               </div>
               <div class="f-group">
                 <label class="f-label">Nom</label>
-                <input type="text" name="nom" class="f-input" value="<?= esc($emp['nom'] ?? '') ?>" required/>
+                <input type="text" name="nom" class="f-input" value="<?= esc(old('nom', $emp['nom'] ?? '')) ?>" required/>
               </div>
               <div class="f-group">
                 <label class="f-label">Email</label>

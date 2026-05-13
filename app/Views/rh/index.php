@@ -15,6 +15,7 @@
       <div><div class="topbar-title">Demandes à traiter</div><div class="topbar-breadcrumb">Accueil</div></div>
     </div>
     <div class="content">
+      <?= view('layout/flash') ?>
       <div class="data-card">
         <div class="data-card-head"><h3>Demandes en attente</h3><span style="color:var(--muted);font-size:.8rem"><?= count($conges) ?> demande(s)</span></div>
         <table class="tbl">

@@ -45,7 +45,7 @@ class RhController extends BaseController
 
         // Compter par statut
         $all    = $congeModel->getAllWithDetails();
-        $counts = ['total' => count($all), 'en_attente' => 0, 'approuvee' => 0, 'refusee' => 0];
+        $counts = ['total' => count($all), 'en_attente' => 0, 'approuve' => 0, 'refuse' => 0, 'annule' => 0];
         foreach ($all as $c) {
             if (isset($counts[$c['statut']])) $counts[$c['statut']]++;
         }
@@ -98,7 +98,7 @@ class RhController extends BaseController
 
         // Mettre à jour le statut
         $congeModel->update($id, [
-            'statut'     => 'approuvee',
+            'statut'     => 'approuve',
             'traite_par' => $this->session->get('userId'),
             'commentaire_rh' => $this->request->getPost('commentaire_rh') ?: null,
         ]);
@@ -121,7 +121,7 @@ class RhController extends BaseController
         $commentaire = $this->request->getPost('commentaire_rh') ?: 'Demande refusée.';
 
         $congeModel->update($id, [
-            'statut'         => 'refusee',
+            'statut'         => 'refuse',
             'traite_par'     => $this->session->get('userId'),
             'commentaire_rh' => $commentaire,
         ]);

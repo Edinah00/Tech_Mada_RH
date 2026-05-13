@@ -35,7 +35,7 @@ $routes->get('/rh/soldes',               'RhController::soldes');
 
 
 // ── ADMIN ─────────────────────────────────────────────────────
-$routes->get('/admin/dashboard',         'AdminController::index');
+$routes->get('/admin/dashboard',         'AdminController::stats');
 
 // CRUD Employés
 $routes->get('/admin/employe',                      'AdminController::employes');

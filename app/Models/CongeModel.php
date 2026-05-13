@@ -61,7 +61,7 @@ class CongeModel extends Model
     public function hasChevauchement(int $empId, string $debut, string $fin, ?int $excludeId = null): bool
     {
         $q = $this->where('employe_id', $empId)
-            ->whereIn('statut', ['en_attente', 'approuvee'])
+            ->whereIn('statut', ['en_attente', 'approuve'])
             ->groupStart()
                 ->where('date_debut <=', $fin)
                 ->where('date_fin >=', $debut)
@@ -93,20 +93,22 @@ class CongeModel extends Model
     public function statsAdmin(): array
     {
         $db = \Config\Database::connect();
-        $annee = date('Y');
-        $mois  = date('m');
+        $all = $db->table('conges')->select('statut')->get()->getResultArray();
 
-        return [
-            'total_en_attente' => $this->where('statut', 'en_attente')->countAllResults(),
-            'approuvees_mois'  => $db->table('conges')
-                ->where('statut', 'approuvee')
-                ->like('created_at', "$annee-$mois", 'after')
-                ->countAllResults(),
-            'absents_auj' => $db->table('conges')
-                ->where('statut', 'approuvee')
-                ->where('date_debut <=', date('Y-m-d'))
-                ->where('date_fin >=', date('Y-m-d'))
-                ->countAllResults(),
+        $stats = [
+            'total'      => count($all),
+            'en_attente' => 0,
+            'approuve'   => 0,
+            'refuse'     => 0,
+            'annule'     => 0,
         ];
+
+        foreach ($all as $conge) {
+            if (isset($stats[$conge['statut']])) {
+                $stats[$conge['statut']]++;
+            }
+        }
+
+        return $stats;
     }
 }

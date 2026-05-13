@@ -18,6 +18,7 @@
       </div>
     </div>
     <div class="content">
+      <?= view('layout/flash') ?>
       <div style="display:grid;grid-template-columns:1fr 300px;gap:1.5rem;align-items:start" class="form-layout">
         <div class="form-section">
           <h3>Détails de la demande</h3>
@@ -28,17 +29,17 @@
               <select name="type_conge_id" class="f-select" required>
                 <option value="">-- Choisir un type --</option>
                 <?php foreach ($types as $t): ?>
-                  <option value="<?= $t['id'] ?>"><?= esc($t['libelle']) ?></option>
+                  <option value="<?= $t['id'] ?>" <?= old('type_conge_id') == $t['id'] ? 'selected' : '' ?>><?= esc($t['libelle']) ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
             <div class="form-grid-2">
-              <div class="f-group"><label class="f-label">Date de début</label><input type="date" name="date_debut" class="f-input" required></div>
-              <div class="f-group"><label class="f-label">Date de fin</label><input type="date" name="date_fin" class="f-input" required></div>
+              <div class="f-group"><label class="f-label">Date de début</label><input type="date" name="date_debut" class="f-input" value="<?= esc(old('date_debut')) ?>" required></div>
+              <div class="f-group"><label class="f-label">Date de fin</label><input type="date" name="date_fin" class="f-input" value="<?= esc(old('date_fin')) ?>" required></div>
             </div>
             <div class="f-group">
               <label class="f-label">Motif</label>
-              <textarea name="motif" class="f-textarea" placeholder="Précisez le motif..."></textarea>
+              <textarea name="motif" class="f-textarea" placeholder="Précisez le motif..."><?= esc(old('motif')) ?></textarea>
             </div>
             <div class="form-actions">
               <button type="submit" class="btn-forest"><i class="bi bi-send"></i> Soumettre la demande</button>

@@ -28,6 +28,14 @@ class EmployeModel extends Model
             ->findAll();
     }
 
+    public function findWithDepartement(int $id): ?array
+    {
+        return $this->select('employes.*, departements.nom AS departement_nom')
+            ->join('departements', 'departements.id = employes.departement_id', 'left')
+            ->where('employes.id', $id)
+            ->first();
+    }
+
     // Employés d'un département
     public function getByDepartement(int $deptId): array
     {

@@ -31,6 +31,7 @@
     </div>
 
     <div class="content">
+      <?= view('layout/flash') ?>
       <div class="data-card">
         <div class="data-card-head">
           <h3>Soldes pour l'année <?= esc($annee) ?></h3>

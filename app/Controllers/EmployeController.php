@@ -35,7 +35,7 @@ class EmployeController extends BaseController
         $soldes = $soldeModel->getSoldesEmploye($empId, $annee);
 
         // Compter par statut
-        $stats = ['en_attente' => 0, 'approuvee' => 0, 'refusee' => 0];
+        $stats = ['en_attente' => 0, 'approuve' => 0, 'refuse' => 0];
         foreach ($conges as $c) {
             if (isset($stats[$c['statut']])) {
                 $stats[$c['statut']]++;
@@ -187,7 +187,7 @@ class EmployeController extends BaseController
                 ->with('error', 'Seules les demandes en attente peuvent être annulées.');
         }
 
-        $congeModel->update($id, ['statut' => 'annulee']);
+        $congeModel->update($id, ['statut' => 'annule']);
 
         return redirect()->to('/employe/conge')
             ->with('success', 'Demande annulée.');
@@ -198,7 +198,7 @@ class EmployeController extends BaseController
     {
         $this->requireEmploye();
         $model = new EmployeModel();
-        $emp   = $model->find($this->empId());
+        $emp   = $model->findWithDepartement($this->empId());
 
         return view('employe/profil', [
             'title' => 'Mon profil',

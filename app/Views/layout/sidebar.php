@@ -25,8 +25,8 @@ function active_class(string $needle, string $uri): string {
   <nav class="sidebar-nav">
     <?php if ($role === 'admin' || $role === 'rh'): ?>
       <div class="sidebar-section">Gestion</div>
-      <li><a href="<?= base_url('/admin/stats') ?>" class="<?= active_class('admin/stats', $uri) ?>"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
-      <li><a href="<?= base_url('/admin/historique') ?>" class="<?= active_class('admin/historique', $uri) . ' ' . active_class('rh', $uri) ?>"><i class="bi bi-inbox"></i> Toutes les demandes <span class="nav-badge alert">4</span></a></li>
+      <li><a href="<?= base_url($role === 'admin' ? '/admin/stats' : '/rh') ?>" class="<?= active_class($role === 'admin' ? 'admin/stats' : 'rh', $uri) ?>"><i class="bi bi-speedometer2"></i> <?= $role === 'admin' ? "Vue d'ensemble" : "Demandes à traiter" ?></a></li>
+      <li><a href="<?= base_url($role === 'admin' ? '/admin/historique' : '/rh') ?>" class="<?= trim(active_class('admin/historique', $uri) . ' ' . active_class('rh', $uri)) ?>"><i class="bi bi-inbox"></i> Toutes les demandes <span class="nav-badge alert">4</span></a></li>
       <li><a href="<?= base_url('/admin/employe') ?>" class="<?= active_class('admin/employe', $uri) ?>"><i class="bi bi-people"></i> Employés</a></li>
       <li><a href="<?= base_url('/admin/departement') ?>" class="<?= active_class('admin/departement', $uri) ?>"><i class="bi bi-building"></i> Départements</a></li>
       <li><a href="<?= base_url('/admin/type-conge') ?>" class="<?= active_class('admin/type-conge', $uri) ?>"><i class="bi bi-tags"></i> Types de congé</a></li>

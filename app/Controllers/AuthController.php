@@ -54,7 +54,7 @@ class AuthController extends BaseController
     private function redirectByRole()
     {
         return match ($this->session->get('userRole')) {
-            'admin' => redirect()->to('/admin/dashboard'),
+            'admin' => redirect()->to('/admin/stats'),
             'rh'    => redirect()->to('/rh'),
             default => redirect()->to('/employe/dashboard'),
         };

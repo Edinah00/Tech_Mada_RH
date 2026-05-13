@@ -17,7 +17,7 @@
       <div>
         <div class="topbar-title">Gestion des employés</div>
         <div class="topbar-breadcrumb">
-          <a href="/admin/dashboard">Admin</a>
+          <a href="/admin/stats">Admin</a>
           <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Employés
         </div>
       </div>

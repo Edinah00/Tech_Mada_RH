@@ -71,10 +71,8 @@ class AdminController extends BaseController
         $this->requireAdmin();
 
         $congeModel = new CongeModel();
-        $soldeModel = new SoldeModel();
         $db         = \Config\Database::connect();
         $annee      = (int) date('Y');
-        $moisCourant = date('Y-m');
 
         // Métriques globales
         $nbEmployes   = $db->table('employes')->where('role', 'employe')->where('actif', 1)->countAllResults();
@@ -99,7 +97,7 @@ class AdminController extends BaseController
             FROM conges c
             JOIN employes e ON e.id = c.employe_id
             JOIN types_conge tc ON tc.id = c.type_conge_id
-            WHERE c.statut = 'approuvee'
+            WHERE c.statut = 'approuve'
               AND c.date_debut <= date('now')
               AND c.date_fin   >= date('now')
             ORDER BY c.date_fin ASC
@@ -157,7 +155,7 @@ class AdminController extends BaseController
 
         // Compteurs par statut
         $all    = $congeModel->getAllWithDetails();
-        $counts = ['total' => count($all), 'en_attente' => 0, 'approuvee' => 0, 'refusee' => 0, 'annulee' => 0];
+        $counts = ['total' => count($all), 'en_attente' => 0, 'approuve' => 0, 'refuse' => 0, 'annule' => 0];
         foreach ($all as $c) {
             if (isset($counts[$c['statut']])) $counts[$c['statut']]++;
         }

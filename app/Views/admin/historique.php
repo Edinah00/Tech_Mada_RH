@@ -17,7 +17,7 @@
       <div>
         <div class="topbar-title">Historique des demandes</div>
         <div class="topbar-breadcrumb">
-          <a href="/admin/dashboard">Admin</a>
+          <a href="/admin/stats">Admin</a>
           <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Historique
         </div>
       </div>
@@ -41,9 +41,9 @@
           $filtres = [
             ''           => "Toutes ({$counts['total']})",
             'en_attente' => "En attente ({$counts['en_attente']})",
-            'approuvee'  => "Approuvées ({$counts['approuvee']})",
-            'refusee'    => "Refusées ({$counts['refusee']})",
-            'annulee'    => "Annulées ({$counts['annulee']})",
+            'approuve'   => "Approuvées ({$counts['approuve']})",
+            'refuse'     => "Refusées ({$counts['refuse']})",
+            'annule'     => "Annulées ({$counts['annule']})",
           ];
           foreach ($filtres as $val => $label):
             $actif = $statut === $val || ($val === '' && !$statut);
@@ -109,14 +109,14 @@
                 <?php
                   $scls = match($c['statut']) {
                     'en_attente' => 's-attente',
-                    'approuvee'  => 's-approuvee',
-                    'refusee'    => 's-refusee',
+                    'approuve'   => 's-approuvee',
+                    'refuse'     => 's-refusee',
                     default      => 's-annulee',
                   };
                   $slbl = match($c['statut']) {
                     'en_attente' => 'en attente',
-                    'approuvee'  => 'approuvée',
-                    'refusee'    => 'refusée',
+                    'approuve'   => 'approuvée',
+                    'refuse'     => 'refusée',
                     default      => 'annulée',
                   };
                 ?>

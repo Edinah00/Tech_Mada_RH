@@ -19,6 +19,7 @@
       <div class="topbar-actions"><a href="/employe/conge/create" class="btn-forest" style="padding:7px 14px;font-size:.82rem"><i class="bi bi-plus-lg"></i> Nouvelle demande</a></div>
     </div>
     <div class="content">
+      <?= view('layout/flash') ?>
       <div class="data-card">
         <div class="data-card-head"><h3>Mes demandes</h3></div>
         <table class="tbl">
@@ -29,7 +30,21 @@
                 <td><span class="type-badge"><?= esc($c['type_libelle']) ?></span></td>
                 <td class="td-muted"><?= date('d/m/Y', strtotime($c['date_debut'])) ?> - <?= date('d/m/Y', strtotime($c['date_fin'])) ?></td>
                 <td class="td-mono"><?= (int)$c['nb_jours'] ?> j</td>
-                <td><span class="statut <?= $c['statut'] === 'en_attente' ? 's-attente' : ($c['statut'] === 'approuvee' ? 's-approuvee' : 's-refusee') ?>"><?= esc($c['statut']) ?></span></td>
+                <?php
+                  $statusClass = match ($c['statut']) {
+                    'en_attente' => 's-attente',
+                    'approuve'   => 's-approuvee',
+                    'refuse'     => 's-refusee',
+                    default      => 's-annulee',
+                  };
+                  $statusLabel = match ($c['statut']) {
+                    'en_attente' => 'en attente',
+                    'approuve'   => 'approuvée',
+                    'refuse'     => 'refusée',
+                    default      => 'annulée',
+                  };
+                ?>
+                <td><span class="statut <?= $statusClass ?>"><?= $statusLabel ?></span></td>
                 <td class="td-muted"><?= esc($c['commentaire_rh'] ?? '—') ?></td>
               </tr>
             <?php endforeach; ?>

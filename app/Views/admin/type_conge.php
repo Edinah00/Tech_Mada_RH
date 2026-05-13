@@ -17,7 +17,7 @@
       <div>
         <div class="topbar-title">Types de congé</div>
         <div class="topbar-breadcrumb">
-          <a href="/admin/dashboard">Admin</a>
+          <a href="/admin/stats">Admin</a>
           <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Types de congé
         </div>
       </div>
