@@ -7,14 +7,8 @@ use CodeIgniter\Database\Seeder;
 /**
  * Seeder principal — TechMada RH
  * Lance : php spark db:seed MainSeeder
- *
- * Insère :
- *  - 3 types de congé
- *  - 2 départements
- *  - 1 admin + 1 RH + 2 employés
- *  - Soldes pour l'année courante
- *  - Quelques demandes de congé de démonstration
  */
+
 class MainSeeder extends Seeder
 {
     public function run(): void
@@ -22,8 +16,27 @@ class MainSeeder extends Seeder
         $db    = \Config\Database::connect();
         $annee = (int) date('Y');
 
+        // ─── DÉSACTIVER LES FOREIGN KEYS (SQLite) ─────────────────
+        $db->simpleQuery('PRAGMA foreign_keys = OFF');
+
+        // ─── VIDER LES TABLES (ordre inverse des dépendances) ─────
+        $db->simpleQuery('DELETE FROM conges');
+        $db->simpleQuery('DELETE FROM soldes');
+        $db->simpleQuery('DELETE FROM employes');
+        $db->simpleQuery('DELETE FROM types_conge');
+        $db->simpleQuery('DELETE FROM departements');
+
+        // Réinitialiser les auto-increments
+        $db->simpleQuery("DELETE FROM sqlite_sequence WHERE name='conges'");
+        $db->simpleQuery("DELETE FROM sqlite_sequence WHERE name='soldes'");
+        $db->simpleQuery("DELETE FROM sqlite_sequence WHERE name='employes'");
+        $db->simpleQuery("DELETE FROM sqlite_sequence WHERE name='types_conge'");
+        $db->simpleQuery("DELETE FROM sqlite_sequence WHERE name='departements'");
+
+        // ─── RÉACTIVER LES FOREIGN KEYS ───────────────────────────
+        $db->simpleQuery('PRAGMA foreign_keys = ON');
+
         // ─── 1. TYPES DE CONGÉ ────────────────────────────────────
-        $db->table('types_conge')->truncate();
         $types = [
             ['libelle' => 'Congé annuel',  'jours_annuels' => 30, 'deductible' => 1],
             ['libelle' => 'Congé maladie', 'jours_annuels' => 10, 'deductible' => 1],
@@ -34,7 +47,6 @@ class MainSeeder extends Seeder
         echo "✓ Types de congé insérés\n";
 
         // ─── 2. DÉPARTEMENTS ──────────────────────────────────────
-        $db->table('departements')->truncate();
         $depts = [
             ['nom' => 'IT',        'description' => 'Informatique & Systèmes'],
             ['nom' => 'Finance',   'description' => 'Comptabilité & Finance'],
@@ -51,7 +63,6 @@ class MainSeeder extends Seeder
         $deptMkt = (int) $db->table('departements')->where('nom', 'Marketing')->get()->getRow()->id;
 
         // ─── 3. EMPLOYÉS ──────────────────────────────────────────
-        $db->table('employes')->truncate();
         $employes = [
             [
                 'nom'            => 'Système',
@@ -111,13 +122,11 @@ class MainSeeder extends Seeder
         $allEmployes = $db->table('employes')->get()->getResultArray();
 
         // ─── 4. SOLDES ────────────────────────────────────────────
-        $db->table('soldes')->truncate();
         $allTypes = $db->table('types_conge')->where('deductible', 1)->get()->getResultArray();
 
         $soldes = [];
         foreach ($allEmployes as $emp) {
             foreach ($allTypes as $type) {
-                // Simuler quelques jours pris pour les anciens employés
                 $joursPris = 0;
                 if ($emp['role'] === 'employe') {
                     if ($type['libelle'] === 'Congé annuel')  $joursPris = rand(2, 8);
@@ -136,9 +145,6 @@ class MainSeeder extends Seeder
         echo "✓ Soldes initialisés pour l'année $annee\n";
 
         // ─── 5. DEMANDES DE DÉMONSTRATION ─────────────────────────
-        $db->table('conges')->truncate();
-
-        // Récupérer IDs par email
         $empSoa   = (int) $db->table('employes')->where('email', 'employe@techmada.mg')->get()->getRow()->id;
         $empTsiry = (int) $db->table('employes')->where('email', 'tsiry@techmada.mg')->get()->getRow()->id;
         $empHaja  = (int) $db->table('employes')->where('email', 'haja@techmada.mg')->get()->getRow()->id;
@@ -148,8 +154,8 @@ class MainSeeder extends Seeder
         $typeMaladie = (int) $db->table('types_conge')->where('libelle', 'Congé maladie')->get()->getRow()->id;
         $typeSpecial = (int) $db->table('types_conge')->where('libelle', 'Congé spécial')->get()->getRow()->id;
 
+        // Valeurs statut autorisées : 'en_attente', 'approuve', 'refuse', 'annule'
         $demandesDemo = [
-            // En attente — Soa (annuel, solde suffisant)
             [
                 'employe_id'     => $empSoa,
                 'type_conge_id'  => $typeAnnuel,
@@ -162,7 +168,6 @@ class MainSeeder extends Seeder
                 'traite_par'     => null,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-2 days')),
             ],
-            // En attente — Tsiry (maladie, solde insuffisant simulé)
             [
                 'employe_id'     => $empTsiry,
                 'type_conge_id'  => $typeMaladie,
@@ -175,7 +180,6 @@ class MainSeeder extends Seeder
                 'traite_par'     => null,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-1 day')),
             ],
-            // En attente — Haja (annuel)
             [
                 'employe_id'     => $empHaja,
                 'type_conge_id'  => $typeAnnuel,
@@ -188,7 +192,6 @@ class MainSeeder extends Seeder
                 'traite_par'     => null,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-3 hours')),
             ],
-            // Approuvée — Soa (maladie)
             [
                 'employe_id'     => $empSoa,
                 'type_conge_id'  => $typeMaladie,
@@ -196,12 +199,11 @@ class MainSeeder extends Seeder
                 'date_fin'       => date('Y-m-d', strtotime('-19 days')),
                 'nb_jours'       => 2,
                 'motif'          => 'Maladie',
-                'statut'         => 'approuvee',
+                'statut'         => 'approuve',
                 'commentaire_rh' => 'Validé sans problème.',
                 'traite_par'     => $empMarie,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-22 days')),
             ],
-            // Approuvée — Soa (annuel passé)
             [
                 'employe_id'     => $empSoa,
                 'type_conge_id'  => $typeAnnuel,
@@ -209,12 +211,11 @@ class MainSeeder extends Seeder
                 'date_fin'       => date('Y-m-d', strtotime('-36 days')),
                 'nb_jours'       => 5,
                 'motif'          => 'Voyage',
-                'statut'         => 'approuvee',
+                'statut'         => 'approuve',
                 'commentaire_rh' => 'OK',
                 'traite_par'     => $empMarie,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-45 days')),
             ],
-            // Refusée — Tsiry (spécial)
             [
                 'employe_id'     => $empTsiry,
                 'type_conge_id'  => $typeSpecial,
@@ -222,12 +223,11 @@ class MainSeeder extends Seeder
                 'date_fin'       => date('Y-m-d', strtotime('-10 days')),
                 'nb_jours'       => 1,
                 'motif'          => 'Événement personnel',
-                'statut'         => 'refusee',
+                'statut'         => 'refuse',
                 'commentaire_rh' => 'Chevauchement détecté avec une période critique.',
                 'traite_par'     => $empMarie,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-12 days')),
             ],
-            // Annulée — Haja
             [
                 'employe_id'     => $empHaja,
                 'type_conge_id'  => $typeAnnuel,
@@ -235,8 +235,8 @@ class MainSeeder extends Seeder
                 'date_fin'       => date('Y-m-d', strtotime('-3 days')),
                 'nb_jours'       => 3,
                 'motif'          => 'Déplacement annulé',
-                'statut'         => 'annulee',
-                'commentaire_rh' => 'Annulé par l\'employé',
+                'statut'         => 'annule',
+                'commentaire_rh' => "Annulé par l'employé",
                 'traite_par'     => null,
                 'created_at'     => date('Y-m-d H:i:s', strtotime('-8 days')),
             ],
