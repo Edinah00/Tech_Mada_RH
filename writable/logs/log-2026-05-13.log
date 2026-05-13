@@ -1,0 +1,220 @@
+ERROR - 2026-05-13 07:10:40 --> Error connecting to the database: TypeError: mysqli::real_connect(): Argument #5 ($port) must be of type ?int, string given in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#9 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: mysqli::real_connect(): Argument #5 ($port) must be of type ?int, string given in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#9 {main}
+CRITICAL - 2026-05-13 07:10:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: mysqli::real_connect(): Argument #5 ($port) must be of type ?int, string given
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 4 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 5 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 6 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 7 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+ 8 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+ERROR - 2026-05-13 07:11:34 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#9 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#10 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#9 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#10 {main}
+CRITICAL - 2026-05-13 07:11:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 5 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 6 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 7 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 8 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+ 9 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+ERROR - 2026-05-13 07:14:14 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php:111
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(111): SQLite3->__construct()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#9 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#10 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php:118
+Stack trace:
+#0 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect()
+#1 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+#4 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+#5 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+#6 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+#7 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(442): CodeIgniter\CLI\Console->run()
+#8 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/system/Boot.php(166): CodeIgniter\Boot::runCommand()
+#9 /home/aropih/MpiaroS4/M.Rojo/Tech_Mada_RH/spark(87): CodeIgniter\Boot::bootSpark()
+#10 {main}
+CRITICAL - 2026-05-13 07:14:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 4 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 5 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 6 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 7 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 8 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+ 9 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:16:55 --> Error: Cannot create dynamic property SQLite3Exception::$xdebug_message
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:16:55 --> [Caused by] SQLite3Exception: Unable to prepare statement: file is not a database
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:21:02 --> Error: Cannot create dynamic property SQLite3Exception::$xdebug_message
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:21:02 --> [Caused by] SQLite3Exception: Unable to prepare statement: file is not a database
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:22:53 --> Error: Cannot create dynamic property SQLite3Exception::$xdebug_message
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:22:53 --> [Caused by] SQLite3Exception: Unable to prepare statement: file is not a database
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:25:29 --> Error: Cannot create dynamic property SQLite3Exception::$xdebug_message
+[Method: CLI, Route: db:table]
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
+CRITICAL - 2026-05-13 07:25:29 --> [Caused by] SQLite3Exception: Unable to prepare statement: file is not a database
+in SYSTEMPATH/Database/SQLite3/Connection.php on line 164.
+ 1 SYSTEMPATH/Database/SQLite3/Connection.php(164): SQLite3->query()
+ 2 SYSTEMPATH/Database/BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute()
+ 3 SYSTEMPATH/Database/BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery()
+ 4 SYSTEMPATH/Database/BaseConnection.php(1706): CodeIgniter\Database\BaseConnection->query()
+ 5 SYSTEMPATH/Commands/Database/ShowTableInfo.php(121): CodeIgniter\Database\BaseConnection->listTables()
+ 6 SYSTEMPATH/CLI/Commands.php(74): CodeIgniter\Commands\Database\ShowTableInfo->run()
+ 7 SYSTEMPATH/CLI/Console.php(47): CodeIgniter\CLI\Commands->run()
+ 8 SYSTEMPATH/Boot.php(442): CodeIgniter\CLI\Console->run()
+ 9 SYSTEMPATH/Boot.php(166): CodeIgniter\Boot::runCommand()
+10 ROOTPATH/spark(87): CodeIgniter\Boot::bootSpark()
