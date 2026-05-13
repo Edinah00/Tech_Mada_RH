@@ -1,161 +1,142 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title) ?> — Admin</title>
+    <title><?= esc($title) ?> — TechMada RH</title>
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<!-- ╔══════════════════════════════════════════════════════════════╗
-     ║  PAGE 6 — DASHBOARD ADMIN  (admin/dashboard.php)            ║
-     ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="page-dashboard-admin" style="margin-top:3rem">
 <div class="app-wrap">
 
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <div class="sidebar-logo-icon" style="background:var(--ink);border:1px solid rgba(255,255,255,.15)"><i class="bi bi-shield-check" style="color:var(--leaf)"></i></div>
-      <div class="sidebar-brand-name">TechMada RH
-        <span>Administration</span>
-      </div>
-    </div>
-    <div class="sidebar-section">Gestion</div>
-    <ul class="sidebar-nav">
-      <li><a href="#page-dashboard-admin" class="active"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
-      <li>
-        <a href="#page-liste-rh">
-          <i class="bi bi-inbox"></i> Toutes les demandes
-          <span class="nav-badge alert">4</span>
-        </a>
-      </li>
-      <li><a href="#page-admin-employes"><i class="bi bi-people"></i> Employés</a></li>
-      <li><a href="#page-admin-employes"><i class="bi bi-building"></i> Départements</a></li>
-      <li><a href="#page-admin-employes"><i class="bi bi-tags"></i> Types de congé</a></li>
-      <li><a href="#page-admin-employes"><i class="bi bi-sliders"></i> Soldes annuels</a></li>
-    </ul>
-    <div class="sidebar-user">
-      <div class="s-user-row">
-        <div class="avatar" style="background:#5a2d82;width:32px;height:32px;font-size:.7rem">AD</div>
-        <div><div class="user-name">Administrateur</div><div class="user-role">Admin système</div></div>
-        <a href="#page-login" style="margin-left:auto;color:rgba(255,255,255,.25);font-size:1.1rem"><i class="bi bi-box-arrow-right"></i></a>
-      </div>
-    </div>
-  </aside>
+  <?= view('layout/sidebar') ?>
 
   <div class="main">
     <div class="topbar">
       <div>
-        <div class="topbar-title">Vue d'ensemble</div>
-        <div class="topbar-breadcrumb">Administration</div>
-      </div>
-      <div class="topbar-actions">
-        <a href="#page-admin-employes" class="btn-forest" style="padding:7px 14px;font-size:.82rem"><i class="bi bi-person-plus"></i> Ajouter un employé</a>
+        <div class="topbar-title">Gestion des départements</div>
+        <div class="topbar-breadcrumb">
+          <a href="/admin/dashboard">Admin</a>
+          <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Départements
+        </div>
       </div>
     </div>
 
     <div class="content">
 
-      <!-- Métriques admin -->
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-top"><div class="metric-icon mi-forest"><i class="bi bi-people"></i></div></div>
-          <div class="metric-val">24</div>
-          <div class="metric-label">Employés actifs</div>
-          <div class="metric-sub up"><i class="bi bi-arrow-up-short"></i> +2 ce mois</div>
-        </div>
-        <div class="metric">
-          <div class="metric-top"><div class="metric-icon mi-amber"><i class="bi bi-hourglass-split"></i></div></div>
-          <div class="metric-val">4</div>
-          <div class="metric-label">Demandes en attente</div>
-        </div>
-        <div class="metric">
-          <div class="metric-top"><div class="metric-icon mi-green"><i class="bi bi-calendar-check"></i></div></div>
-          <div class="metric-val">31</div>
-          <div class="metric-label">Approuvées ce mois</div>
-          <div class="metric-sub up"><i class="bi bi-arrow-up-short"></i> +6 vs mois dernier</div>
-        </div>
-        <div class="metric">
-          <div class="metric-top"><div class="metric-icon mi-blue"><i class="bi bi-building"></i></div></div>
-          <div class="metric-val">4</div>
-          <div class="metric-label">Départements</div>
-        </div>
-        <div class="metric">
-          <div class="metric-top"><div class="metric-icon mi-red"><i class="bi bi-person-slash"></i></div></div>
-          <div class="metric-val">3</div>
-          <div class="metric-label">Absents aujourd'hui</div>
-        </div>
-      </div>
+      <?php if (session()->getFlashdata('success')): ?>
+        <div class="flash flash-success"><i class="bi bi-check-circle-fill"></i> <?= esc(session()->getFlashdata('success')) ?></div>
+      <?php endif; ?>
+      <?php if (session()->getFlashdata('error')): ?>
+        <div class="flash flash-error"><i class="bi bi-exclamation-circle-fill"></i> <?= esc(session()->getFlashdata('error')) ?></div>
+      <?php endif; ?>
 
-      <div style="display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start">
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start">
 
-        <!-- Demandes récentes -->
+        <!-- Liste des départements -->
         <div class="data-card" style="margin:0">
-          <div class="data-card-head">
-            <h3>Demandes récentes</h3>
-            <a href="#page-liste-rh" style="font-size:.8rem;color:var(--forest);text-decoration:none">Tout voir →</a>
-          </div>
+          <div class="data-card-head"><h3>Départements (<?= count($depts) ?>)</h3></div>
+          <?php if (empty($depts)): ?>
+            <div class="empty"><i class="bi bi-building"></i><p>Aucun département.</p></div>
+          <?php else: ?>
           <table class="tbl">
             <thead>
-              <tr><th>Employé</th><th>Type</th><th>Durée</th><th>Statut</th></tr>
+              <tr><th>Nom</th><th>Description</th><th>Employés actifs</th><th>Actions</th></tr>
             </thead>
             <tbody>
+              <?php foreach ($depts as $d): ?>
               <tr>
-                <td><div style="display:flex;align-items:center;gap:7px"><div class="avatar av-green" style="width:28px;height:28px;font-size:.62rem">SR</div><span class="td-name" style="font-size:.84rem">Soa Rakoto</span></div></td>
-                <td><span class="type-badge t-annuel">Annuel</span></td>
-                <td class="td-mono">5 j</td>
-                <td><span class="statut s-attente">en attente</span></td>
+                <td style="font-weight:500"><?= esc($d['nom']) ?></td>
+                <td class="td-muted" style="font-size:.8rem"><?= esc($d['description'] ?? '—') ?></td>
+                <td class="td-mono"><?= (int)$d['nb_employes'] ?></td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-sm btn-edit"
+                            onclick="remplirEdit(<?= $d['id'] ?>, '<?= esc($d['nom'], 'attr') ?>', '<?= esc($d['description'] ?? '', 'attr') ?>')">
+                      <i class="bi bi-pencil"></i> Éditer
+                    </button>
+                    <?php if ((int)$d['nb_employes'] === 0): ?>
+                    <form method="POST" action="/admin/departement/delete/<?= $d['id'] ?>"
+                          onsubmit="return confirm('Supprimer ce département ?')" style="display:inline">
+                      <?= csrf_field() ?>
+                      <button type="submit" class="btn-sm btn-del"><i class="bi bi-trash"></i></button>
+                    </form>
+                    <?php else: ?>
+                      <span class="td-muted" style="font-size:.72rem" title="Des employés sont rattachés">
+                        <i class="bi bi-lock"></i>
+                      </span>
+                    <?php endif; ?>
+                  </div>
+                </td>
               </tr>
-              <tr>
-                <td><div style="display:flex;align-items:center;gap:7px"><div class="avatar av-amber" style="width:28px;height:28px;font-size:.62rem">TF</div><span class="td-name" style="font-size:.84rem">Tsiry Fidy</span></div></td>
-                <td><span class="type-badge t-maladie">Maladie</span></td>
-                <td class="td-mono">2 j</td>
-                <td><span class="statut s-attente">en attente</span></td>
-              </tr>
-              <tr>
-                <td><div style="display:flex;align-items:center;gap:7px"><div class="avatar av-blue" style="width:28px;height:28px;font-size:.62rem">HA</div><span class="td-name" style="font-size:.84rem">Haja Andria</span></div></td>
-                <td><span class="type-badge t-annuel">Annuel</span></td>
-                <td class="td-mono">5 j</td>
-                <td><span class="statut s-approuvee">approuvée</span></td>
-              </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
+          <?php endif; ?>
         </div>
 
-        <!-- Absents du jour + soldes critiques -->
+        <!-- Formulaires -->
         <div style="display:flex;flex-direction:column;gap:1rem">
-          <div class="data-card" style="margin:0">
-            <div class="data-card-head"><h3><i class="bi bi-person-slash" style="color:var(--muted);margin-right:5px"></i>Absents aujourd'hui</h3></div>
-            <div style="padding:.75rem 1.1rem;display:flex;flex-direction:column;gap:.6rem">
-              <div style="display:flex;align-items:center;gap:8px">
-                <div class="avatar av-green" style="width:30px;height:30px;font-size:.65rem">SR</div>
-                <div><div style="font-size:.83rem;font-weight:500;color:var(--ink)">Soa Rakoto</div><div style="font-size:.72rem;color:var(--muted)">Congé annuel · retour 28/06</div></div>
+
+          <!-- Ajout -->
+          <div class="form-section" style="margin:0">
+            <h3><i class="bi bi-building-add" style="color:var(--forest);margin-right:6px"></i>Nouveau département</h3>
+            <form method="POST" action="/admin/departement/store">
+              <?= csrf_field() ?>
+              <div class="f-group">
+                <label class="f-label">Nom <span style="color:var(--danger)">*</span></label>
+                <input type="text" name="nom" class="f-input" placeholder="Ex : Marketing" required/>
               </div>
-              <div style="display:flex;align-items:center;gap:8px">
-                <div class="avatar" style="width:30px;height:30px;font-size:.65rem;background:#993556">NR</div>
-                <div><div style="font-size:.83rem;font-weight:500;color:var(--ink)">Noro Ramarao</div><div style="font-size:.72rem;color:var(--muted)">Maladie · retour 17/06</div></div>
+              <div class="f-group">
+                <label class="f-label">Description</label>
+                <input type="text" name="description" class="f-input" placeholder="Optionnel"/>
               </div>
-              <div style="display:flex;align-items:center;gap:8px">
-                <div class="avatar av-amber" style="width:30px;height:30px;font-size:.65rem">KF</div>
-                <div><div style="font-size:.83rem;font-weight:500;color:var(--ink)">Ketaka Feno</div><div style="font-size:.72rem;color:var(--muted)">Congé spécial · retour 16/06</div></div>
+              <div class="form-actions">
+                <button type="submit" class="btn-forest"><i class="bi bi-plus"></i> Créer</button>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="flash flash-warn" style="margin:0">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            <span style="font-size:.8rem">2 employés ont un solde critique (≤ 2 jours). <a href="#" style="color:var(--warn);font-weight:500">Voir les soldes →</a></span>
+
+          <!-- Édition -->
+          <div class="form-section" id="form-edit" style="margin:0;display:none;border-color:var(--forest)">
+            <h3><i class="bi bi-pencil" style="color:var(--forest);margin-right:6px"></i>Modifier</h3>
+            <form method="POST" id="form-edit-action" action="">
+              <?= csrf_field() ?>
+              <div class="f-group">
+                <label class="f-label">Nom</label>
+                <input type="text" name="nom" id="edit-nom" class="f-input" required/>
+              </div>
+              <div class="f-group">
+                <label class="f-label">Description</label>
+                <input type="text" name="description" id="edit-desc" class="f-input"/>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-forest"><i class="bi bi-check"></i> Enregistrer</button>
+                <button type="button" class="btn-secondary"
+                        onclick="document.getElementById('form-edit').style.display='none'">
+                  <i class="bi bi-x"></i> Annuler
+                </button>
+              </div>
+            </form>
           </div>
+
         </div>
-
       </div>
-
     </div>
     <div class="footer-app"><i class="bi bi-c-circle"></i> 2025 <span>TechMada RH</span></div>
   </div>
 
 </div>
-</section>
+
+<script>
+function remplirEdit(id, nom, desc) {
+  document.getElementById('form-edit').style.display = 'block';
+  document.getElementById('form-edit-action').action = '/admin/departement/update/' + id;
+  document.getElementById('edit-nom').value  = nom;
+  document.getElementById('edit-desc').value = desc;
+  document.getElementById('form-edit').scrollIntoView({behavior:'smooth'});
+}
+</script>
 </body>
 </html>
