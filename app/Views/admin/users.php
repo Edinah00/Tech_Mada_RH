@@ -7,110 +7,181 @@
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
-<div class="app-wrapper">
-    <?= view('partials/sidebar') ?>
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  PAGE 7 — GESTION EMPLOYÉS  (admin/employes.php)            ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="page-admin-employes" style="margin-top:3rem">
+<div class="app-wrap">
 
-    <div class="main-content">
-        <div class="topbar">
-            <span class="topbar-title">👥 Gestion des Utilisateurs</span>
-            <div class="d-flex gap-8 align-center">
-                <input type="text" id="search-input" class="form-control" placeholder="Rechercher un utilisateur..."
-                       style="width:240px" oninput="filterUsers(this.value)">
-            </div>
-        </div>
-
-        <div class="page-body">
-            <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
-            <?php endif; ?>
-
-            <div class="card">
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Utilisateur</th>
-                                <th>Genre</th>
-                                <th>IMC</th>
-                                <th>Statut</th>
-                                <th>Solde</th>
-                                <th>Programmes</th>
-                                <th>Inscrit le</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="users-table">
-                        <?php if (empty($users)): ?>
-                            <tr><td colspan="8" class="text-center" style="padding:32px;color:var(--ink-muted)">Aucun utilisateur enregistré</td></tr>
-                        <?php endif; ?>
-                        <?php foreach ($users as $u): ?>
-                            <?php
-                            $imc = null;
-                            if (!empty($u['taille']) && !empty($u['poids_actuel'])) {
-                                $imcVal = round($u['poids_actuel'] / ($u['taille'] * $u['taille']), 1);
-                                $imcCat = $imcVal < 18.5 ? 'Sous-poids' : ($imcVal < 25 ? 'Normal' : ($imcVal < 30 ? 'Surpoids' : 'Obésité'));
-                                $imcColor = $imcVal < 18.5 ? 'var(--blue)' : ($imcVal < 25 ? 'var(--green-500)' : ($imcVal < 30 ? 'var(--amber)' : 'var(--red)'));
-                            }
-                            ?>
-                            <tr data-search="<?= strtolower($u['nom'] . ' ' . $u['email']) ?>">
-                                <td>
-                                    <div class="d-flex align-center gap-8">
-                                        <div style="width:36px;height:36px;border-radius:50%;background:var(--green-500);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.85rem;flex-shrink:0">
-                                            <?= strtoupper(substr($u['nom'], 0, 1)) ?>
-                                        </div>
-                                        <div>
-                                            <div style="font-weight:600;font-size:.875rem"><?= esc($u['nom']) ?></div>
-                                            <div style="font-size:.75rem;color:var(--ink-muted)"><?= esc($u['email']) ?></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><?= $u['genre'] === 'M' ? '♂️ Masculin' : '♀️ Féminin' ?></td>
-                                <td>
-                                    <?php if (!empty($u['taille'])): ?>
-                                        <span style="font-weight:700;color:<?= $imcColor ?>">
-                                            <?= $imcVal ?>
-                                        </span>
-                                        <div style="font-size:.7rem;color:var(--ink-muted)"><?= $imcCat ?></div>
-                                    <?php else: ?>
-                                        <span style="color:var(--ink-muted);font-size:.8rem">—</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <?php if ($u['is_gold']): ?>
-                                        <span class="badge badge-gold">⭐ GOLD</span>
-                                    <?php else: ?>
-                                        <span class="badge badge-gray">Standard</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <strong style="color:var(--green-700)">
-                                        <?= number_format($u['solde'] ?? 0, 0, ',', ' ') ?> Ar
-                                    </strong>
-                                </td>
-                                <td>
-                                    <span class="badge badge-blue"><?= $u['nb_programmes'] ?> programme(s)</span>
-                                </td>
-                                <td style="font-size:.8rem;color:var(--ink-muted)">
-                                    <?= date('d/m/Y', strtotime($u['created_at'])) ?>
-                                </td>
-                                <td>
-                                    <form action="<?= site_url('/admin/users/gold/' . $u['id']) ?>" method="post">
-                                        <?= csrf_field() ?>
-                                        <button class="btn <?= $u['is_gold'] ? 'btn-danger' : 'btn-gold' ?> btn-sm">
-                                            <?= $u['is_gold'] ? '❌ Retirer GOLD' : '⭐ Passer GOLD' ?>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo-icon" style="background:var(--ink);border:1px solid rgba(255,255,255,.15)"><i class="bi bi-shield-check" style="color:var(--leaf)"></i></div>
+      <div class="sidebar-brand-name">TechMada RH<span>Administration</span></div>
     </div>
-</div>
+    <ul class="sidebar-nav" style="margin-top:1rem">
+      <li><a href="#page-dashboard-admin"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
+      <li><a href="#page-liste-rh"><i class="bi bi-inbox"></i> Toutes les demandes</a></li>
+      <li><a href="#page-admin-employes" class="active"><i class="bi bi-people"></i> Employés</a></li>
+      <li><a href="#page-admin-employes"><i class="bi bi-building"></i> Départements</a></li>
+      <li><a href="#page-admin-employes"><i class="bi bi-tags"></i> Types de congé</a></li>
+    </ul>
+    <div class="sidebar-user">
+      <div class="s-user-row">
+        <div class="avatar" style="background:#5a2d82;width:32px;height:32px;font-size:.7rem">AD</div>
+        <div><div class="user-name">Administrateur</div><div class="user-role">Admin système</div></div>
+      </div>
+    </div>
+  </aside>
 
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">Gestion des employés</div>
+        <div class="topbar-breadcrumb"><a href="#page-dashboard-admin">Admin</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Employés</div>
+      </div>
+      <div class="topbar-actions">
+        <a href="#" class="btn-forest" style="padding:7px 14px;font-size:.82rem"><i class="bi bi-person-plus"></i> Ajouter</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- Formulaire ajout -->
+      <div class="form-section">
+        <h3><i class="bi bi-person-plus" style="color:var(--forest);margin-right:6px"></i>Ajouter un employé</h3>
+        <div class="form-grid-2" style="margin-bottom:1rem">
+          <div class="f-group">
+            <label class="f-label">Prénom</label>
+            <input type="text" class="f-input" placeholder="Jean"/>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Nom</label>
+            <input type="text" class="f-input" placeholder="Rakoto"/>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Email</label>
+            <input type="email" class="f-input" placeholder="jean.rakoto@techmada.mg"/>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Mot de passe initial</label>
+            <input type="password" class="f-input" placeholder="À communiquer à l'employé"/>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Département</label>
+            <select class="f-select">
+              <option>IT</option>
+              <option>Finance</option>
+              <option>Marketing</option>
+              <option>RH</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Rôle</label>
+            <select class="f-select">
+              <option value="employe">Employé</option>
+              <option value="rh">Responsable RH</option>
+              <option value="admin">Administrateur</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Date d'embauche</label>
+            <input type="date" class="f-input" value="2025-06-13"/>
+          </div>
+        </div>
+        <div class="flash flash-info" style="margin-bottom:1rem">
+          <i class="bi bi-info-circle-fill"></i>
+          <span style="font-size:.82rem">Les soldes de congés seront initialisés automatiquement selon les types de congé configurés.</span>
+        </div>
+        <div class="form-actions">
+          <button class="btn-forest"><i class="bi bi-plus"></i> Créer l'employé</button>
+          <button class="btn-secondary">Réinitialiser</button>
+        </div>
+      </div>
+
+      <!-- Liste employés -->
+      <div class="data-card">
+        <div class="data-card-head">
+          <h3>Tous les employés</h3>
+          <div style="display:flex;gap:6px">
+            <input type="text" class="f-input" placeholder="Rechercher..." style="width:200px;padding:6px 10px;font-size:.8rem"/>
+            <select class="f-select" style="font-size:.8rem;padding:6px 10px;width:auto">
+              <option>Tous les depts</option>
+              <option>IT</option>
+              <option>Finance</option>
+            </select>
+          </div>
+        </div>
+        <table class="tbl">
+          <thead>
+            <tr><th>Employé</th><th>Département</th><th>Rôle</th><th>Embauche</th><th>Statut</th><th>Solde annuel</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="profile-row">
+                  <div class="avatar av-green" style="width:32px;height:32px;font-size:.68rem">SR</div>
+                  <div class="profile-info"><div class="pname">Soa Rakoto</div><div class="pdept">soa@techmada.mg</div></div>
+                </div>
+              </td>
+              <td class="td-muted">IT</td>
+              <td><span class="type-badge" style="background:#f1efe8;color:#444441">employe</span></td>
+              <td class="td-muted td-mono" style="font-size:.78rem">2022-03-01</td>
+              <td><span class="statut s-approuvee" style="font-size:.68rem">actif</span></td>
+              <td><span style="font-family:'DM Mono',monospace;font-size:.82rem;color:var(--forest)">18 / 30 j</span></td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-sm btn-edit"><i class="bi bi-pencil"></i> Éditer</button>
+                  <button class="btn-sm btn-del"><i class="bi bi-slash-circle"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="profile-row">
+                  <div class="avatar av-blue" style="width:32px;height:32px;font-size:.68rem">MR</div>
+                  <div class="profile-info"><div class="pname">Marie Rabe</div><div class="pdept">rh@techmada.mg</div></div>
+                </div>
+              </td>
+              <td class="td-muted">RH</td>
+              <td><span class="type-badge t-maladie">rh</span></td>
+              <td class="td-muted td-mono" style="font-size:.78rem">2020-01-15</td>
+              <td><span class="statut s-approuvee" style="font-size:.68rem">actif</span></td>
+              <td><span style="font-family:'DM Mono',monospace;font-size:.82rem;color:var(--forest)">25 / 30 j</span></td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-sm btn-edit"><i class="bi bi-pencil"></i> Éditer</button>
+                  <button class="btn-sm btn-del"><i class="bi bi-slash-circle"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr style="opacity:.5">
+              <td>
+                <div class="profile-row">
+                  <div class="avatar av-amber" style="width:32px;height:32px;font-size:.68rem">TF</div>
+                  <div class="profile-info"><div class="pname">Tsiry Fidy</div><div class="pdept">tsiry@techmada.mg</div></div>
+                </div>
+              </td>
+              <td class="td-muted">Finance</td>
+              <td><span class="type-badge" style="background:#f1efe8;color:#444441">employe</span></td>
+              <td class="td-muted td-mono" style="font-size:.78rem">2019-07-10</td>
+              <td><span class="statut s-annulee" style="font-size:.68rem">inactif</span></td>
+              <td><span style="font-family:'DM Mono',monospace;font-size:.82rem;color:var(--muted)">— / — j</span></td>
+              <td>
+                <div class="action-btns">
+                  <button class="btn-sm btn-view"><i class="bi bi-arrow-counterclockwise"></i> Réactiver</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="footer-app"><i class="bi bi-c-circle"></i> 2025 <span>TechMada RH</span></div>
+  </div>
+
+</div>
+</section>
 <script>
 function filterUsers(query) {
     query = query.toLowerCase();
